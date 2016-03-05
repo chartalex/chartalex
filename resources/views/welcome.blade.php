@@ -28,9 +28,9 @@
                 </p>
                 <br>
         </div>
+{{--
 
 <hr>
-
 
     <h4 class="text-center">
         <i class="fa fa-instagram"></i> Meet my Curriculum Vitae</a>.
@@ -66,7 +66,7 @@ Accomplishments
         <li>Travel to more than 30 countries</li>
         <li>+10 entrepreneurship prizes</li>
     </ul>
-
+--}}
 
 <hr>
 
