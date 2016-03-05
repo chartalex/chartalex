@@ -15,8 +15,9 @@ class IndexController extends Controller
 
 	public function index () {
 
-		Carbon::setLocale('fr');
+		//Carbon::setLocale('fr');
 
+		$onk_quit_date = Carbon::create(2015, 12, 15, 0)->diffForHumans();
 
 		$instas = [
 					['date'		=> Carbon::create(2016, 2, 22, 0)->diffForHumans(),
@@ -44,7 +45,7 @@ class IndexController extends Controller
 
 		//$dates = Carbon::create(2016, 2, 22, 0)->diffForHumans();      
 
-	    return view('welcome', array('instas' => $instas ));
+	    return view('welcome', array('instas' => $instas, 'onk_quit_date' => $onk_quit_date ));
 
 	}
 
