@@ -9,7 +9,7 @@
 
         <div class="text-center">
                 <br>
-                <h2>Hello World !</h2>
+                <h2>< Hello World ! ></h2>
                 <br>
                 <p class="lead">
                 At 28 years old, I became millionaire, <br>
@@ -17,17 +17,56 @@
                 And believe me, cocaïne is nothing compared to a web startup.
                 </p>
                 <p class="lead">
-                Hopefully, one day my investors understood I was crazy.<br>
-                I was forced to quit the company I founded. <br>
-                And instead of an Aston Martin to drive, I purchased a van to live in.
+                Hopefully, I've always been more attracted by freedom than money.<br>
+                So I quit my own company {{ $onk_quit_date }}.<br>
+                And instead of an Aston Martin to drive, I purchased a van to live in.<br>
                 </p>
                 <p class="lead">
-                Since then, I do not believe in profit-for-some companies. <br>
-                I refuse to work just for myself, and will serve the world<br>
-                with the ideas I’m lucky enough to get.
+                Since then, I ride all over Europe and work remotely.<br>
+                My new office got 4 wheels, a solar panel,<br>
+                and a computer connected to the world.<br>
                 </p>
                 <br>
         </div>
+
+<hr>
+
+
+    <h4 class="text-center">
+        <i class="fa fa-instagram"></i> Meet my Curriculum Vitae</a>.
+    </h4>
+    <br>
+
+Skills
+    <ul>
+        <li>Developper autodidact</li>
+        <li>Preparing a plane license</li>
+        <li>Kitesurf practice</li>
+    </ul>
+
+Languages
+    <ul>
+        <li>French thanks to my parents</li>
+        <li>English thanks to movies and their subtitles<br>(bonus: british cockney accent on demand)</li>
+        <li>Spanish because they can't speak previous one very well in Bolivia.</li>
+        <li>Thaï for the needs of my university exchange program in 2008<br>"nip noï" but able count up to 1 billion baths)</li>
+        <li>Portuguese beacause i'm currently there (learning)</li>
+    </ul>
+Previous lifes
+
+trader
+
+
+Accomplishments
+    <ul>
+        <li>A Tedx Talk</li>
+        <li>Paris to Istanbul with 20 euros in pocket</li>
+        <li>A cover on the New York Times</li>
+        <li>TV, radio, paper</li>
+        <li>Travel to more than 30 countries</li>
+        <li>+10 entrepreneurship prizes</li>
+    </ul>
+
 
 <hr>
 
