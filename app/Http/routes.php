@@ -28,14 +28,39 @@ Route::group(['middleware' => ['web']], function () {
     
 	Route::get('/', 'IndexController@index');
 
-	Route::get('/shop', 'ShopController@index');
+	Route::get('/mclh', 'ShopController@index');
 
 
-	Route::get('/cart', 'CartController@cart');
-	Route::post('/cart', 'CartController@cart');
+	Route::get('/mclh/cart', 'CartController@cart');
+	Route::post('/mclh/cart', 'CartController@cart');
 
-	Route::get('/cart/remove', 'CartController@remove');
-	Route::get('/cart/destroy', 'CartController@destroy');
+	Route::get('/mclh/cart/remove', 'CartController@remove');
+	Route::get('/mclh/cart/destroy', 'CartController@destroy');
 
-    
+
+	Route::resource('/mclh/order', 'OrderController', [
+	   	'only' => ['store', 'show']
+	   	//    'except' => ['edit', 'create']
+	]);
+
+
+    // Only authenticated users may enter...
+	Route::get('/mclh/order', [
+    	'middleware' => 'auth',
+    	'uses' => 'OrderController@index'
+	]);
+
+	Route::get('posts/{title}', function ($title) {
+		return View::make('posts.'.$title);
+	});
+
+	// Authentication routes...
+	Route::get('auth/login', 'Auth\AuthController@getLogin');
+	Route::post('auth/login', 'Auth\AuthController@postLogin');
+	Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+
+	// Registration routes...
+	//Route::get('auth/register', 'Auth\AuthController@getRegister');
+	//Route::post('auth/register', 'Auth\AuthController@postRegister');
 });

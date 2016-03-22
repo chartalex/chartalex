@@ -11,6 +11,9 @@ use App\Product;
 class CartController extends Controller
 {
 
+	private $shipping = 5;
+
+
 	public function cart() {
 		if (Request::isMethod('post')) {
 	        $product_id = Request::get('product_id');
@@ -59,9 +62,7 @@ class CartController extends Controller
 
 	    $cart = Cart::content();
 
-		$shipping = 5;
-
-	    return view('cart', array('cart' => $cart, 'shipping' => $shipping));
+	    return view('cart', array('cart' => $cart, 'shipping' => $this->shipping));
 	}
 
 
@@ -72,7 +73,7 @@ class CartController extends Controller
 
 		$cart = Cart::content();
 
-	    return view('cart', array('cart' => $cart));
+	    return view('cart', array('cart' => $cart, 'shipping' => $this->shipping));
 	}
 
 }

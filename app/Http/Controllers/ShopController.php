@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Product;
+use Cart;
 
 class ShopController extends Controller
 {
@@ -28,7 +29,8 @@ class ShopController extends Controller
 			}
 		}
 		
+	    $cart = Cart::content();
 
-		return View('shop', compact('products', 'groups'));
+		return View('mclh.index', compact('products', 'groups', 'cart'));
     }
 }

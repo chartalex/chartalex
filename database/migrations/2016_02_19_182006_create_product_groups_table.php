@@ -14,6 +14,13 @@ class CreateProductGroupsTable extends Migration
     {
         Schema::create('product_groups', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->string('attribute');
+            $table->string('prefix');
+            $table->tinyInteger('price');
+            $table->tinyInteger('price_prod');
+            $table->tinyInteger('price_vat');
+            $table->tinyInteger('price_mclh');
             $table->timestamps();
         });
     }

@@ -22,10 +22,12 @@ elixir(function(mix) {
 	var jqueryPath = 'resources/assets/vendor/jquery';
 	var bootstrapPath = 'node_modules/bootstrap-sass/assets';
 	var BSselectPath = 'node_modules/bootstrap-select';
+	var BSValidatorPath = 'resources/assets/vendor/bootstrapvalidator';
 	mix.sass('app.scss')
 	    .copy(jqueryPath + '/dist/jquery.min.js', 'public/js')
 		.copy(bootstrapPath + '/fonts', 'public/fonts')
 		.copy(bootstrapPath + '/javascripts/bootstrap.min.js', 'public/js')
-		.copy(BSselectPath + '/dist/js/bootstrap-select.min.js', 'public/js');
+		.copy(BSselectPath + '/dist/js/bootstrap-select.min.js', 'public/js')
+		.copy(BSValidatorPath + '/src/js/bootstrapValidator.js', 'public/js');
 });
 
