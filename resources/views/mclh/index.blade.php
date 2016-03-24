@@ -4,7 +4,7 @@
 
 @section('content')
             
-            <h1 class="lead"><img src="/img/mclh/mclh-logo.png" alt="Monsieur Chat L'Heureux" height="40"/> Monsieur Chat l'Heureux's shop</h1><br><br>
+            <h1 class="lead"><img src="/img/mclh/mclh-logo.png" alt="Monsieur Chat L'Heureux" height="30"/> Monsieur Chat l'Heureux's shop</h1><br><br>
 
 
             <div class="row">
@@ -52,7 +52,7 @@
                 @endforeach
             </div>
 
-            <div class="row" style="padding-top: 10px">
+            <div class="row small" style="padding-top: 10px">
                 <div class="col-xs-6">
                     < <a href="/" class="text-muted">Back to homepage</a>
                 </div>

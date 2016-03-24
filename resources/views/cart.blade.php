@@ -134,7 +134,7 @@
 				    <br>
 
 				    <div class="row">
-				        <div class="col-xs-6" style="padding-top: 6px;">
+				        <div class="col-xs-6 small" style="padding-top: 6px;">
 							< <a href="{{url('/mclh')}}" class="text-muted">Back to shop</a>
 				        </div>
 				        <div class="col-xs-6 text-right">
