@@ -3,20 +3,6 @@
 @section('title', 'Monsieur Chat l\'Heureux')
 
 @section('content')
-
-            <div class="row" style="padding-top: 10px">
-                <div class="col-xs-6">
-                    <i class="fa fa-home"></i>
-                    <a href="/" class="text-muted"> Back to homepage</a>
-                </div>
-                <div class="col-xs-6 text-right">
-                    @if (count($cart))
-                    <i class="fa fa-shopping-cart"></i>                
-                    <a href="/mclh/cart" class="text-muted"> Cart </a>
-                    ({{ count($cart) }})
-                    @endif
-                </div>
-            </div>
             
             <h1 class="lead"><img src="/img/mclh/mclh-logo.png" alt="Monsieur Chat L'Heureux" height="40"/> Monsieur Chat l'Heureux's shop</h1><br><br>
 
@@ -66,7 +52,19 @@
                 @endforeach
             </div>
 
+            <div class="row" style="padding-top: 10px">
+                <div class="col-xs-6">
+                    < <a href="/" class="text-muted">Back to homepage</a>
+                </div>
+                <div class="col-xs-6 text-right">
+                    @if (count($cart))
+                    <a href="/mclh/cart" class="text-muted"> Go to cart </a>
+                    ({{ Cart::count() }}) >
+                    @endif
+                </div>
+            </div>
 
+            <br><br>
 
 @endsection
 
