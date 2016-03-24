@@ -4,44 +4,29 @@
 
 @section('content')
 
-<a href="/mclh/order">< Back to all</a><br><br>
+<br>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-5" style="border:solid 2px grey">
-        <div class="row">
-          <div class="col-md-4 palette-silver">Date</div> 
-          <div class="col-md-8">{{ $order->created_at }}</div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 palette-silver">Stripe #</div>
-            <div class="col-md-8">
-                {{ $order->stripe_transaction_id }}
-            </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 palette-silver">Email</div>
-            <div class="col-md-8">
-                {{ $order->email }}
-            </div>
-        </div>
-    </div>
-    <div class="col-md-5 col-md-offset-2" style="border:solid 2px grey">
-      <h5 class="text-center">Adresse de livraison</h5>
+<div class="small">
+      <p>
+        Date: {{ $order->created_at }}
+      </p>
+      <p>
+        Email: {{ $order->email }}
+
+      </p>
+
+      <h3>Shipping information</h3>
       <strong>{{ $order->shipto_firstname }} {{ $order->shipto_lastname }}</strong><br/>
       {{ $order->shipto_street }}<br/>
       {{ strlen($order->shipto_street2 > 0) ? $order->shipto_street2.'<br/>': ''}}
       {{ $order->shipto_zip }} {{ $order->shipto_city }}<br/>
       {{ $order->shipto_country }}<br/>
-    </div>
-    <div class="col-md-1"></div>
-  </div>
 </div>
+
 
 <br/><br/><br/>
 
 
-<div class="container">
 
   <table class="table">
     <thead>
@@ -91,7 +76,6 @@
   </div>
 
 
-</div>
 
 
 @endsection
