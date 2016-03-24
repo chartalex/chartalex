@@ -68,7 +68,6 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
             'email' => $data['email'],
         ]);
     }
@@ -78,7 +77,23 @@ class AuthController extends Controller
         // validate that this is a real email address
         // send off a login email
         // show the users a view saying "check your email"
-        $this->validate($request, ['email' => 'required|email|exists:users']);
+        //$this->validate($request, ['email' => 'required|email|exists:users']);
+
+        $rules = [
+            'email' => 'required|email|exists:users'
+        ];
+
+        $messages = [
+            'email.exists' => 'You are not yet registered! <br> The only way to create an account is to place an order. <br> <a href="/mclh/">Go to shop</a>.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect('auth/login')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
         $emailLogin = EmailLogin::createForEmail($request->input('email'));
 
@@ -91,7 +106,7 @@ class AuthController extends Controller
         $m->to($request->input('email'))->subject('Login');
         });
 
-        return 'Login email sent. Go check your email.';
+        return redirect('auth/email-sent');
     }
 
     public function authenticateEmail($token)

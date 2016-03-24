@@ -64,6 +64,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('auth/login', 'Auth\AuthController@postLogin');
 	Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
+	Route::get('auth/email-sent', function () {
+		return View::make('auth.email-sent');
+	});
+
 
 	Route::get('auth/email-authenticate/{token}', [
 	    'as' => 'auth.email-authenticate',
@@ -71,6 +75,6 @@ Route::group(['middleware' => ['web']], function () {
 	]);
 
 	// Registration routes...
-	Route::get('auth/register', 'Auth\AuthController@getRegister');
-	Route::post('auth/register', 'Auth\AuthController@postRegister');
+	//Route::get('auth/register', 'Auth\AuthController@getRegister');
+	//Route::post('auth/register', 'Auth\AuthController@postRegister');
 });

@@ -5,8 +5,16 @@
 
 @section('content')
 
-@if (Auth::check())
-    // The user is logged in...
+<br>
+
+@if (count($errors) > 0)
+    <div class="alert alert-info">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{!! $error !!}</li>
+            @endforeach
+        </ul>
+    </div>
 @endif
 
 
@@ -16,8 +24,7 @@
     </div>
 @endif
 
-<br><br>
-
+<br>
 
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
@@ -29,10 +36,8 @@
         </div>
     </div>
 
-
 <form method="POST" action="/auth/login">
     {!! csrf_field() !!}
-
 
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
