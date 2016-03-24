@@ -4,7 +4,7 @@
 
 @section('content')
 
-{{-- Show $request errors after back-end validation --}}
+{{-- Show $request errors after back-end validation 
   <div class="col-md-6 col-md-offset-3">
       @if($errors->has())
           <div class="alert alert-danger fade in">
@@ -18,13 +18,17 @@
           </div>
       @endif
   </div>
+--}}
 
+<h2>Order success !</h2>
 
-<h1>Commande confirmée</h1>
+<p>Your payment has been accepted and your order will be shipped soon.</p>
 
-<p>Votre paiement a bien été accepté</p> 
+<p>Thank you for your order.</p>
 
-<p> Status:</p>
+<p>This confirmation has been emailed to you.</p>
+
+<p><i class="fa fa-home"></i><a href="/" class="text-muted"> Back to homepage</a></p>
 
 @endsection
 
