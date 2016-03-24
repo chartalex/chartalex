@@ -28,7 +28,7 @@ class IndexController extends Controller
 					 'loc_name' => 'Praia de Almograve, Portugal',
 					 'loc_url'	=> 'https://www.instagram.com/explore/locations/235589218/',
 					 'text'		=> 'Do you like my new garden? #nohome #everywhereishome',
-					 'likes'	=> '18'],				
+					 'likes'	=> '20'],				
 					['date'		=> Carbon::create(2016, 2, 10, 0)->diffForHumans(null, true),
 					 'pic'		=> 'img/insta/faro.jpg',
 					 'url'		=> 'https://www.instagram.com/p/BBnCNsvlaKl/',
