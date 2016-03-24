@@ -11,6 +11,7 @@ use App\Product;
 use App\Order;
 use App\OrderDetails;
 use App\Http\Requests;
+use Config;
 
 class OrderController extends Controller
 {
@@ -18,28 +19,58 @@ class OrderController extends Controller
 
     public function index()
     {
+        $admin_email = env('ADMIN_EMAIL'); // run php artisan cache:clear to work properly
 
-        $orders = Order::orderBy('created_at', 'desc')->get();
-        $user = Auth::user();
+        if (Auth::check()) {
+            // The user is logged in...
+            $email = Auth::user()->email;
 
-        return view('mclh.admin', array(
-            'orders' => $orders,
-            'user' => $user
-            ));
+            if ($email == $admin_email) {
+                
+                $orders = Order::orderBy('created_at', 'desc')->get();
+                $user = Auth::user();
+
+                return view('mclh.orders-admin', array(
+                    'orders' => $orders
+                ));
+
+            } else {
+                $orders = Order::where('email', $email)->orderBy('created_at', 'desc')->get();
+                $user = Auth::user();
+
+                return view('mclh.orders', array(
+                    'orders' => $orders
+                ));
+            }
+        } else {
+            return redirect('/auth/login')->with('info','You must be logged to see your previous orders.');
+        }
+
+ 
     }
 
     public function show($id)
     {
+
         $order = Order::find($id);
         $order_details = OrderDetails::where('order_id', $id)->join('products', 'order_details.product_id', '=', 'products.id')->get();
-        $products = \App\Product::all();
+
+        if (Auth::check()) {
+        // The user is logged in...
+            if (Auth::user()->id == $order->user_id OR Auth::user()->email == env('ADMIN_EMAIL')) {
+
+                return view('mclh.order', array(
+                    'order' => $order,
+                    'order_details' => $order_details
+                ));
+            } else {
+                return redirect('/mclh/order');
+            }
+        } else {
+            return redirect('/auth/login')->with('info','You must be logged to see your previous orders.');
+        }
 
 
-
-        return view('mclh.order', array(
-            'order' => $order,
-            'order_details' => $order_details
-        ));
     }
 
     public function store(Request $request)
@@ -95,7 +126,28 @@ class OrderController extends Controller
             'stripe_customer_id' => $customerID,
             ]);
         } else {
-            $customerID = User::where('email', $email)->value('stripe_customer_id');
+            // email exists in database
+
+            // stripe_customer_id exists in database
+            if (!empty(User::where('email', $email)->value('stripe_customer_id')) ) {
+                $customerID = User::where('email', $email)->value('stripe_customer_id');
+            } else {
+                // Create a new Stripe customer if null
+                try {
+                    $customer = \Stripe\Customer::create([
+                    'source' => $token,
+                    'email' => $email,
+                    ]);
+                } catch (\Stripe\Error\Card $e) {
+                    return redirect()->route('order')
+                        ->withErrors($e->getMessage())
+                        ->withInput();
+                } 
+
+                $customerID = $customer->id;
+                // Fill blank stripe_customer_id
+                $user = User::where('email', $email)->update([ 'stripe_customer_id' => $customerID ]);
+            }
             $user = User::where('email', $email)->first();
         }
 
@@ -140,8 +192,8 @@ class OrderController extends Controller
 		    ]);
         }
 
+        Cart::destroy();
 
-        return view('mclh.success');
-
+        return redirect('mclh/order-success');
     }
 }

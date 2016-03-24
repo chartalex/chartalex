@@ -7,6 +7,11 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\EmailLogin;
+use Mail;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -28,7 +33,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/mclh/order';
 
     /**
      * Create a new authentication controller instance.
@@ -51,7 +56,6 @@ class AuthController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
         ]);
     }
 
@@ -66,7 +70,37 @@ class AuthController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
         ]);
     }
+
+    public function login(Request $request)
+    {
+        // validate that this is a real email address
+        // send off a login email
+        // show the users a view saying "check your email"
+        $this->validate($request, ['email' => 'required|email|exists:users']);
+
+        $emailLogin = EmailLogin::createForEmail($request->input('email'));
+
+        $url = route('auth.email-authenticate', [
+            'token' => $emailLogin->token
+        ]);
+
+        Mail::send('auth.emails.email-login', ['url' => $url], function ($m) use ($request) {
+        $m->from('noreply@chartalex.fr', 'M. Chat L\'Heureux');
+        $m->to($request->input('email'))->subject('Login');
+        });
+
+        return 'Login email sent. Go check your email.';
+    }
+
+    public function authenticateEmail($token)
+    {
+        $emailLogin = EmailLogin::validFromToken($token);
+
+        Auth::login($emailLogin->user);
+
+        return redirect('/mclh/order');
+    }
+
 }
