@@ -15,6 +15,17 @@
     <body>
         <div class="container">
             <div class="container-700">
+            @if (Auth::check())
+                <div class="text-right small">
+                    Hello <a href="/mclh/order/" title="{{ Auth::user()->email }}">{{ Auth::user()->name }}</a> <span style="opacity: 0.5">(<a href="/auth/logout">logout</a>)</span>
+                    @if (isset($cart))
+                        <i class="fa fa-shopping-cart"></i>                
+                        <a href="/mclh/cart" class="text-muted"> Cart </a>
+                        ({{ Cart::count() }})
+                    @endif
+                </div>
+            @endif
+
             @yield('content')
             </div><!-- .container-700 -->
         </div><!-- .container -->
