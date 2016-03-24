@@ -135,7 +135,7 @@
 
 				    <div class="row">
 				        <div class="col-xs-6" style="padding-top: 6px;">
-							<a href="{{url('/mclh')}}" class="text-muted">< Back to shop</a>
+							< <a href="{{url('/mclh')}}" class="text-muted">Back to shop</a>
 				        </div>
 				        <div class="col-xs-6 text-right">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -182,10 +182,14 @@
   $('#payment-form').on('submit', function(e) {
     // Open Checkout with further options
     handler.open({
-      name: 'chartalex.fr',
-      description: 'Monsieur Chat L\'Heureux',
-      currency: "eur",
-      amount: {{ (Cart::total() + $shipping)*100 }}
+      name: 'M. Chat L\'Heureux',
+      description: '{{ Cart::count() }} products',
+      currency: 'eur',
+      allowRememberMe: 'false',
+      amount: {{ (Cart::total() + $shipping)*100 }},
+      @if (Auth::check())
+      email: '{{ Auth::user()->email }}'
+      @endif
     });
     e.preventDefault();
     return false;
