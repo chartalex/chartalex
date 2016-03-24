@@ -4,8 +4,6 @@
 
 @section('content')
 
-Hello, {{ $user->name }} <span style="opacity: 0.5">(<a href="/auth/logout">logout</a>)</span>
-
 <table class="table">
     <thead>
       <tr>
@@ -15,7 +13,7 @@ Hello, {{ $user->name }} <span style="opacity: 0.5">(<a href="/auth/logout">logo
         <th class="text-center">Prénom</th>
         <th class="text-center">Email</th>
         <th class="text-center">Montant</th>
-        <th class="text-center">Statut</th>
+        <th class="text-center">Status</th>
         <th class="text-center">Stripe</th>
       </tr>
     </thead>
