@@ -12,6 +12,8 @@ use App\Order;
 use App\OrderDetails;
 use App\Http\Requests;
 use Config;
+use App\EmailLogin;
+use Mail;
 
 class OrderController extends Controller
 {
@@ -193,6 +195,18 @@ class OrderController extends Controller
         }
 
         Cart::destroy();
+
+        // Send email confirmation
+        $emailLogin = EmailLogin::createForEmail($request->input('email'));
+
+        $url = route('auth.email-authenticate', [
+            'token' => $emailLogin->token
+        ]);
+
+        Mail::send('mclh.emails.email-order-success', ['url' => $url], function ($m) use ($request) {
+        $m->from('mclh@chartalex.fr', 'M. Chat L\'Heureux');
+        $m->to($request->input('email'))->subject('Order success');
+        });
 
         return redirect('mclh/order-success');
     }
