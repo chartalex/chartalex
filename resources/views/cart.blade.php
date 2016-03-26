@@ -73,6 +73,11 @@
 
 				<br><br>
 
+				<p class="small">
+					Delivery takes usually between 2 and 15 days.<br>
+					Yes I know it's vague. But it depends on where is the nearest post office on my road.<br>
+				<br>
+
 				{{-- Show $request errors after back-end validation --}}
 				    @if($errors->has())
 			          <div class="alert alert-danger fade in">
@@ -128,6 +133,14 @@
 				    <div class="row">
 				        <div class="col-sm-6">
 				            <input type="text" name="shipto_country" placeholder="Country" value="" class="form-control" required="required"/>
+				        </div>
+				    </div>
+
+				    <br>
+
+				    <div class="row">
+				        <div class="col-sm-6 small">
+				        	<input type="checkbox" required="required"/> I accept the <a href="/mclh/terms">terms and conditions</a>.
 				        </div>
 				    </div>
 

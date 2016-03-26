@@ -41,6 +41,10 @@ Route::group(['middleware' => ['web']], function () {
 		return View::make('mclh.order-success');
 	});
 
+	Route::get('/mclh/terms', function () {
+		return View::make('mclh.terms');
+	});
+
 
 	Route::resource('/mclh/order', 'OrderController');
 	//Route::resource('/mclh/order', 'OrderController', [
