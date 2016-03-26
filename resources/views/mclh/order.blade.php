@@ -31,10 +31,10 @@
   <table class="table">
     <thead>
       <tr>
-        <th class="text-center">Description</th>
-        <th class="text-center">Taille</th>
-        <th class="text-center">Quantité</th>
-        <th class="text-right">Montant</th>
+        <th class="text-center">Product</th>
+        <th class="text-center">Size</th>
+        <th class="text-center">Quantity</th>
+        <th class="text-right">Price</th>
       </tr>
     </thead>
      <tbody>
@@ -49,33 +49,42 @@
     @endforeach
 
     </tbody>
+
+    <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td class="text-right">Shipping</td>
+        <td class="text-right">
+          @if ( $order->shipping_fees > 0 )
+            {{ $order->shipping_fees }} €
+          @else
+            free
+          @endif
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td class="text-right">
+          <strong>Total</strong>
+        </td>
+        <td class="text-right">
+          <strong>{{ $order->amount }} €</strong>
+        </td>
+      </tr>
+    </tfoot>
   </table>
 
   </br> 
 
+  <p class="small">
+    Total amount include {{ number_format((float) ($order->amount - $order->shipping_fees)*0.2, 2) }} € of french taxes (VAT 20%).
+  </p>
 
-  <div class="row">
-    <div class="col-md-7"></div>
-    <div class="col-md-4" style="border:solid 2px grey">
-      <div class="row">
-        <div class="col-md-6 palette-silver">Frais de port</div>  
-        <div class="col-md-6 text-right">
-          @if ( $order->shipping_fees > 0 )
-            {{ $order->shipping_fees }} €
-          @else
-            offerts
-          @endif
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 palette-silver">Total</div>  
-        <div class="col-md-6 text-right">{{ $order->amount }} €</div>
-      </div>
-    </div>
-    <div class="col-md-1"></div>
-  </div>
-
-
+  <p class="small">
+    < <a href="/mclh/order" class="text-muted"> Back to all orders</a>
+  </p>
 
 
 @endsection

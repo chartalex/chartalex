@@ -35,6 +35,10 @@
       </tbody>
     </table>
 
+  <p class="small">
+    < <a href="/" class="text-muted"> Back to all orders</a>
+  </p>
+
   @else
 
     <p>
